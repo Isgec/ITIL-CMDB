@@ -1,0 +1,254 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:17:59 =~=~=~=~=~=~=~=~=~=~=~=
+
+
+User Access Verification
+
+Username: cisco
+Password: 
+
+% Authentication failed
+
+Username: cisco
+Password: 
+
+LAN-L3-SWITCH>en
+Password: 
+LAN-L3-SWITCH#sh run
+Building configuration...
+
+Current configuration : 5958 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname LAN-L3-SWITCH
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$4f4G$ReFwYGxXtb1XdmQACTE.u/
+!
+username cisco password 0 cisco
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+ --More--         !
+!
+!
+aaa session-id common
+system mtu routing 1500
+ip routing
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-217414016
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-217414016
+ revocation-check none
+ rsakeypair TP-self-signed-217414016
+!
+!
+crypto pki certificate chain TP-self-signed-217414016
+ certificate self-signed 01
+  30820244 308201AD A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32313734 31343031 36301E17 0D393330 33303130 30303133 
+  365A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+ --More--           532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3231 37343134 
+  30313630 819F300D 06092A86 4886F70D 01010105 0003818D 00308189 02818100 
+  D5A0B3F3 B723AFC4 E00E3EC5 2CB7D59A FA2D8D03 11C7256D 9DD6983F 350C7A5A 
+  A09432B1 E4532CA8 55CDDDF0 7B3328CB E2501FE8 0A176617 963436E2 28C03B0D 
+  5ADFA6A2 B7308ECE 6F04994C E0CDACF6 0D72DFC3 D9AA0878 58FD7305 FBFA04A5 
+  284685A9 FE11E16E 587D741C 4F1ACAA7 46D6086C ED9D9483 4B782CCD DD78699B 
+  02030100 01A36E30 6C300F06 03551D13 0101FF04 05300301 01FF3019 0603551D 
+  11041230 10820E4C 414E2D4C 332D5357 49544348 2E301F06 03551D23 04183016 
+  80147BFC 8D21D9DD 50A8689A 7990AAD7 BA7CEF23 A74F301D 0603551D 0E041604 
+  147BFC8D 21D9DD50 A8689A79 90AAD7BA 7CEF23A7 4F300D06 092A8648 86F70D01 
+  01040500 03818100 85C43AD3 4BF65FB7 9E4DB33D 4F860601 C30BF229 9137E1E0 
+  313E1161 FC7A3ECB 4DF864A3 DDB631F2 B826046D C0F65253 DC988D22 D49B35A1 
+  4AAE064C AC38A1AD 98F2CE9A 399FFC24 44159C95 A646B5A0 24FD4EED F7C39D17 
+  6F0DCF1E 0222BD89 258BA6FD 37EB658E B8C6700C 6A65147E EF039082 90B28248 
+  E88F2B9B 2D05971C
+  quit
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+ --More--         !
+!
+!
+interface GigabitEthernet0/1
+ description ##First-Floor & Ground Floor VLAN$$
+ switchport access vlan 28
+ switchport mode access
+!
+interface GigabitEthernet0/2
+ description ##First-Floor & Ground Floor VLAN$$
+ switchport access vlan 28
+ switchport mode access
+!
+interface GigabitEthernet0/3
+ description ##First-Floor & Ground Floor VLAN$$
+ switchport access vlan 28
+ switchport mode access
+!
+interface GigabitEthernet0/4
+ description ##First-Floor & Ground Floor VLAN$$
+ switchport access vlan 28
+ switchport mode access
+!
+ --More--         interface GigabitEthernet0/5
+ description ##First-Floor & Ground Floor VLAN$$
+ switchport access vlan 28
+ switchport mode access
+!
+interface GigabitEthernet0/6
+ description ##Second Floor VLAN##
+ switchport access vlan 29
+ switchport mode access
+!
+interface GigabitEthernet0/7
+ description ##Second Floor VLAN##
+ switchport access vlan 29
+ switchport mode access
+!
+interface GigabitEthernet0/8
+ description ##Second Floor VLAN##
+ switchport access vlan 29
+ switchport mode access
+!
+interface GigabitEthernet0/9
+ description ##Second Floor VLAN##
+ switchport access vlan 29
+ --More--          switchport mode access
+!
+interface GigabitEthernet0/10
+ description ##Second Floor VLAN##
+ switchport access vlan 29
+ switchport mode access
+!
+interface GigabitEthernet0/11
+ description ##Fourth $ Basement Floor VLAN##
+ switchport access vlan 31
+ switchport mode access
+!
+interface GigabitEthernet0/12
+ description ##Fourth $ Basement Floor VLAN##
+ switchport access vlan 31
+ switchport mode access
+!
+interface GigabitEthernet0/13
+ description ##Fourth $ Basement Floor VLAN##
+ switchport access vlan 31
+ switchport mode access
+!
+interface GigabitEthernet0/14
+ --More--          description ##Fourth $ Basement Floor VLAN##
+ switchport access vlan 31
+ switchport mode access
+!
+interface GigabitEthernet0/15
+ description ##Fourth $ Basement Floor VLAN##
+ switchport access vlan 31
+ switchport mode access
+!
+interface GigabitEthernet0/16
+ description ##Third Floor VLAN##
+ switchport access vlan 32
+ switchport mode access
+!
+interface GigabitEthernet0/17
+ description ##Third Floor VLAN##
+ switchport access vlan 32
+ switchport mode access
+!
+interface GigabitEthernet0/18
+ description ##Third Floor VLAN##
+ switchport access vlan 32
+ switchport mode access
+ --More--         !
+interface GigabitEthernet0/19
+ description ##Third Floor VLAN##
+ switchport access vlan 32
+ switchport mode access
+!
+interface GigabitEthernet0/20
+ description ##Third Floor VLAN##
+ switchport access vlan 32
+ switchport mode access
+!
+interface GigabitEthernet0/21
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet0/22
+ switchport access vlan 28
+ switchport mode access
+!
+interface GigabitEthernet0/23
+ switchport access vlan 28
+ switchport mode access
+!
+ --More--         interface GigabitEthernet0/24
+ description ##Connectivity to WAN-L3-Switch##
+ switchport access vlan 10
+ switchport mode access
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+!
+interface GigabitEthernet0/28
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan10
+ ip address 10.10.24.1 255.255.255.0
+!
+interface Vlan28
+ ip address 192.168.28.54 255.255.255.0
+ ip helper-address 192.9.200.138
+!
+ --More--         interface Vlan29
+ ip address 192.168.29.54 255.255.255.0
+ ip helper-address 192.9.200.138
+!
+interface Vlan31
+ ip address 192.168.31.54 255.255.255.0
+ ip helper-address 192.9.200.138
+!
+interface Vlan32
+ ip address 192.168.32.54 255.255.255.0
+ ip helper-address 192.9.200.138
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.10.24.3
+ip route 11.11.16.0 255.255.255.0 10.10.24.3
+ip route 172.15.1.0 255.255.255.0 10.10.24.3
+ip route 172.16.1.0 255.255.255.0 10.10.24.3
+ip route 192.9.200.198 255.255.255.255 10.10.24.3
+ip http server
+ip http secure-server
+!
+snmp-server community public RO
+!
+ --More--         !
+line con 0
+line vty 5 15
+!
+end
+
+LAN-L3-SWITCH#   
