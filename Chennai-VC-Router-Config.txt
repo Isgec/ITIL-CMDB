@@ -1,0 +1,130 @@
+Chennai-VC-Router#sh run
+Building configuration...
+
+Current configuration : 2728 bytes
+!
+version 12.4
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+service password-encryption
+service sequence-numbers
+!
+hostname Chennai-VC-Router
+!
+boot-start-marker
+boot-end-marker
+!
+security authentication failure rate 3 log
+security passwords min-length 6
+logging buffered 51200 debugging
+logging console critical
+enable secret 5 $1$H01/$1D1UFsp4BiHqGGhPHlYCX1
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+!
+aaa session-id common
+!
+resource policy
+!
+clock timezone PCTime 5 30
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+ip subnet-zero
+no ip source-route
+ip cef
+!
+!
+ip tcp synwait-time 10
+no ip dhcp use vrf connected
+!
+!
+no ip bootp server
+ip domain name yourdomain.com
+ip name-server 203.124.16.100
+ip name-server 203.124.20.100
+!
+username ijt privilege 15 secret 5 $1$wPsi$QnCxTDEmf65PhIqyXS4LI/
+username cisco password 7 000A1C000B490C031B
+!
+!
+!
+interface FastEthernet0/0
+ description $ETH-LAN$$ETH-SW-LAUNCH$$INTF-INFO-FE 0$$ES_LAN$$FW_INSIDE$
+ ip address 192.168.22.10 255.255.255.0
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip nat inside
+ ip route-cache flow
+ duplex auto
+ speed auto
+ no mop enabled
+!
+interface FastEthernet0/1
+ ip address 182.73.238.218 255.255.255.248
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip nat outside
+ ip route-cache flow
+ duplex auto
+ speed auto
+ no mop enabled
+!
+interface Serial0/0/0
+ description $ES_WAN$
+ ip address 10.10.10.6 255.255.255.252
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip route-cache flow
+ clockrate 2000000
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 182.73.238.217
+ip route 192.9.200.197 255.255.255.255 192.168.22.200
+ip route 192.9.200.198 255.255.255.255 192.168.22.200
+ip route 192.9.200.199 255.255.255.255 192.168.22.200
+ip route 192.168.5.50 255.255.255.255 192.168.22.200
+ip route 192.168.10.100 255.255.255.255 192.168.22.200
+ip route 192.168.25.150 255.255.255.255 192.168.22.200
+ip route 192.168.33.0 255.255.255.0 192.168.22.200
+!
+ip http server
+ip http authentication local
+ip http timeout-policy idle 60 life 86400 requests 10000
+ip nat inside source static 192.168.22.128 182.73.238.220
+!
+logging trap debugging
+snmp-server community public RO
+no cdp run
+!
+control-plane
+!
+banner login ^CAuthorized access only!
+ Disconnect IMMEDIATELY if you are not an authorized user!^C
+!
+line con 0
+ transport output telnet
+line aux 0
+ transport output telnet
+line vty 0 4
+ privilege level 15
+ password 7 030A540D091D26495A
+ transport input telnet
+line vty 5 15
+ privilege level 15
+ transport input telnet
+!
+scheduler allocate 4000 1000
+end
+
+Chennai-VC-Router#
