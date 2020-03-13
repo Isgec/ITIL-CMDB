@@ -1,0 +1,170 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:35:28 =~=~=~=~=~=~=~=~=~=~=~=
+
+User Access Verification
+
+Username: cisco
+Password: 
+
+% Authentication failed
+
+Username: admin
+Password: 
+
+TATA-MPLS-NOIDA>en
+Password: 
+% Access denied
+
+TATA-MPLS-NOIDA>en
+Password: 
+TATA-MPLS-NOIDA#sh run
+Building configuration...
+
+Current configuration : 2124 bytes
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname TATA-MPLS-NOIDA
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$/rPJ$hrm353MQYqqbCKNYjqxEK0
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+!
+!
+ --More--         !
+!
+!
+aaa session-id common
+wan mode dsl
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+username admin password 0 @#isgec@123
+!
+!
+ --More--         controller VDSL 0
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback1
+ no ip address
+!
+interface ATM0
+ no ip address
+ shutdown
+ no atm ilmi-keepalive
+!
+interface Ethernet0
+ --More--          no ip address
+ shutdown
+!
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+!
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface GigabitEthernet0
+ switchport access vlan 2
+ no ip address
+!
+interface GigabitEthernet1
+ no ip address
+ shutdown
+ duplex auto
+ --More--          speed auto
+!
+interface Vlan1
+ ip address 192.9.200.180 255.255.255.0
+!
+interface Vlan2
+ ip address 10.6.240.130 255.255.255.252
+!
+router bgp 64713
+ bgp router-id 10.6.240.130
+ bgp log-neighbor-changes
+ neighbor 10.6.240.129 remote-as 4755
+ !
+ address-family ipv4
+  network 10.6.240.0 mask 255.255.255.0
+  network 10.6.244.0 mask 255.255.255.0
+  network 192.168.5.0
+  network 192.168.7.0
+  network 192.168.9.0
+  network 192.168.10.0
+  network 192.168.15.0
+  network 192.168.22.0
+  network 192.168.25.0
+ --More--           network 192.168.31.0
+  redistribute connected
+  neighbor 10.6.240.129 activate
+ exit-address-family
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 192.168.5.0 255.255.255.0 192.9.200.54
+ip route 192.168.7.0 255.255.255.0 192.9.200.54
+ip route 192.168.9.0 255.255.255.0 192.9.200.54
+ip route 192.168.15.0 255.255.255.0 192.9.200.54
+ip route 192.168.22.0 255.255.255.0 192.9.200.54
+ip route 192.168.25.0 255.255.255.0 192.9.200.54
+ip route 192.168.31.0 255.255.255.0 192.9.200.54
+!
+mac-address-table aging-time 15
+!
+!
+!
+!
+ --More--         line con 0
+ no modem enable
+line aux 0
+line vty 0 4
+ password noforget
+ transport input all
+!
+scheduler allocate 60000 1000
+!
+end
+
+TATA-MPLS-NOIDA# 
