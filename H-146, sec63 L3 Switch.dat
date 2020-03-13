@@ -1,0 +1,428 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 14:08:24 =~=~=~=~=~=~=~=~=~=~=~=
+login as: cisco
+Using keyboard-interactive authentication.
+Password: 
+
+CORE-L3-H146-ISGEC-SH>en
+Password: 
+CORE-L3-H146-ISGEC-SH#sh run
+Building configuration...
+
+Current configuration : 11248 bytes
+!
+! Last configuration change at 03:34:51 UTC Sat Aug 31 2019
+!
+version 16.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+!
+hostname CORE-L3-H146-ISGEC-SH
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 5 $1$aWbp$5bvskmV9tNKtBIC5epY3B.
+ --More--         !
+aaa new-model
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+aaa session-id common
+switch 1 provision ws-c3850-24t
+!
+!
+!
+!
+ip routing
+!
+!
+!
+ip dhcp excluded-address 192.168.41.1 192.168.41.100
+!
+ip dhcp pool wifi 41
+ --More--          network 192.168.41.0 255.255.255.0
+ default-router 192.168.41.1 
+ dns-server 8.8.8.8 
+ lease 8
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3560867454
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3560867454
+ revocation-check none
+ rsakeypair TP-self-signed-3560867454
+!
+!
+crypto pki certificate chain TP-self-signed-3560867454
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+ --More--           31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33353630 38363734 3534301E 170D3139 30353231 30393436 
+  32325A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 35363038 
+  36373435 34308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B69D 82C820F2 15D2CE59 EFBBD439 6124F59B F02BE085 B1672D1A 
+  90FF665B C4FFDDB7 DF7D6716 F0A8553E C223DF74 A742383F D1C1DBEB 6602091A 
+  D1630F45 8B4AB6C2 47ECE63D 6170DB6B C2431850 0C6F3A84 576860B7 9012AF37 
+  C5D4B896 52A25E04 1219C490 3F7B1FC0 8A2CB0DC CFDB1B0C 188A3E31 793A5E83 
+  EFEB5228 A1B36C20 F767A536 2E5B073D D3260151 542289C7 A7DBDBED 7194A73A 
+  D6C1EA6B 29A10F31 F3EC52E7 0A578E73 68CCDA2D 98797C5E A27A1636 307FB4DD 
+  2BD66F5F 2FC07112 F4F374F6 199EECF7 5114DC01 D2350598 DE27CC5A 94B2096C 
+  186E3B9A 05E38F0D 57DB412A 93E65E1D 627C2A75 90049A10 1E8A9591 24914444 
+  E84E2604 E24F0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14D2C6AC 9E912B3F 9738EF50 A091BE49 5CFC8757 
+  FA301D06 03551D0E 04160414 D2C6AC9E 912B3F97 38EF50A0 91BE495C FC8757FA 
+  300D0609 2A864886 F70D0101 05050003 82010100 8E3CE030 2C9E8E95 0706E39B 
+  7FAD34D5 D3747FE1 CE3396A3 6A13664D F40D0F56 ED70937E B88DD69A 2B3B23DC 
+  0FAFA1C9 7A6FB26E 483ACB44 F7918B41 3E59AA78 25DBE4B6 65094F0D F8616C5E 
+  D20D7070 9839FEBE 9D323646 3214B316 96457DBE 4617C366 ACA8A5C0 4603429A 
+  733FC014 5900F8B5 9364F3BB 8B7F0AAE 32DC50A7 C0ACB9A1 35B3458C 22ACD75B 
+  BF3C4F8C EE401037 434B42C4 59D3BCB1 28FB88D0 6C38EFC7 C65F5886 FF131939 
+  0BD31D57 151A4B63 CF403405 C389E9B8 7B555D30 3CE0F9E4 A733E7FE 4EAF1535 
+ --More--           7D4F8952 C5BB0416 86572751 82649BC5 302FBFA2 135FEA99 60F9ADC2 91C7D5A8 
+  C60D10B9 3C48B2B3 E07C2F27 17E0BDD2 9F87A838
+  	quit
+!
+license boot level ipbasek9
+diagnostic bootup level minimal
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+username cisco password 0 cisco
+!
+redundancy
+ mode sso
+!
+!
+!
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, SGT Cache Full, LOGGING
+class-map match-any system-cpp-default
+  description DHCP snooping, show forward and rest of traffic
+ --More--         class-map match-any system-cpp-police-sys-data
+  description Learning cache ovfl, Crypto Control, Exception, EGR Exception, NFL SAMPLED DATA, Gold Pkt, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-multicast
+  description Transit Traffic and MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-control-low-priority
+  description ICMP redirect and general punt
+class-map match-any system-cpp-police-wireless-priority1
+  description Wireless priority 1
+class-map match-any system-cpp-police-wireless-priority2
+  description Wireless priority 2
+ --More--         class-map match-any system-cpp-police-wireless-priority3-4-5
+  description Wireless priority 3,4 and 5
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+!
+policy-map port_child_policy
+ class non-client-nrt-class
+  bandwidth remaining ratio 10
+policy-map system-cpp-policy
+ class system-cpp-police-data
+  police rate 200 pps
+ class system-cpp-police-sys-data
+  police rate 100 pps
+ class system-cpp-police-sw-forward
+  police rate 1000 pps
+ class system-cpp-police-multicast
+  police rate 500 pps
+ class system-cpp-police-multicast-end-station
+  police rate 2000 pps
+ class system-cpp-police-punt-webauth
+ --More--          class system-cpp-police-l2-control
+ class system-cpp-police-routing-control
+  police rate 1800 pps
+ class system-cpp-police-control-low-priority
+ class system-cpp-police-wireless-priority1
+ class system-cpp-police-wireless-priority2
+ class system-cpp-police-wireless-priority3-4-5
+ class system-cpp-police-topology-control
+ class system-cpp-police-dot1x-auth
+ class system-cpp-police-protocol-snooping
+ class system-cpp-police-forus
+ class system-cpp-default
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ --More--         !
+!
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 25
+ switchport mode access
+ --More--         !
+interface GigabitEthernet1/0/5
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+ --More--         interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 41
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 41
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 40
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 40
+ switchport mode access
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 40
+ --More--          switchport mode access
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 40
+ switchport mode access
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 40
+ switchport mode access
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 40
+ switchport mode access
+!
+interface GigabitEthernet1/0/24
+ description HP_1920 Trunk
+ switchport mode trunk
+!
+interface GigabitEthernet1/1/1
+ switchport mode trunk
+!
+interface GigabitEthernet1/1/2
+ switchport mode trunk
+ --More--         !
+interface GigabitEthernet1/1/3
+ switchport mode trunk
+!
+interface GigabitEthernet1/1/4
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+interface TenGigabitEthernet1/1/3
+!
+interface TenGigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan3
+ ip address 172.16.2.2 255.255.255.0
+!
+interface Vlan25
+ ip address 192.168.25.190 255.255.255.0
+ --More--         !
+interface Vlan40
+ ip address 192.168.40.1 255.255.255.0
+!
+interface Vlan41
+ ip address 192.168.41.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 172.16.2.1
+ip route 192.9.200.0 255.255.255.0 192.168.25.1
+ip route 192.168.9.0 255.255.255.0 192.168.25.1
+ip route 192.168.10.0 255.255.255.0 192.168.25.1
+ip route 192.168.22.0 255.255.255.0 192.168.25.1
+ip route 192.168.24.0 255.255.255.0 192.168.25.1
+ip route 192.168.25.4 255.255.255.255 192.168.25.1
+ip route 192.168.25.7 255.255.255.255 192.168.25.1
+ip route 192.168.25.20 255.255.255.255 192.168.25.1
+ip route 192.168.25.23 255.255.255.255 192.168.25.1
+ --More--         ip route 192.168.25.26 255.255.255.255 192.168.25.1
+ip route 192.168.25.35 255.255.255.255 192.168.25.1
+ip route 192.168.25.40 255.255.255.255 192.168.25.1
+ip route 192.168.25.41 255.255.255.255 192.168.25.1
+ip route 192.168.25.43 255.255.255.255 192.168.25.1
+ip route 192.168.25.46 255.255.255.255 192.168.25.1
+ip route 192.168.25.48 255.255.255.255 192.168.25.1
+ip route 192.168.25.52 255.255.255.255 192.168.25.1
+ip route 192.168.25.53 255.255.255.255 192.168.25.1
+ip route 192.168.25.76 255.255.255.255 192.168.25.1
+ip route 192.168.25.80 255.255.255.255 192.168.25.1
+ip route 192.168.28.0 255.255.255.0 192.168.25.1
+ip route 192.168.33.0 255.255.255.0 192.168.25.1
+!
+ip access-list extended AutoQos-4.0-wlan-Acl-Bulk-Data
+ permit tcp any any eq 22
+ permit tcp any any eq 465
+ permit tcp any any eq 143
+ permit tcp any any eq 993
+ permit tcp any any eq 995
+ permit tcp any any eq 1914
+ permit tcp any any eq ftp
+ permit tcp any any eq ftp-data
+ --More--          permit tcp any any eq smtp
+ permit tcp any any eq pop3
+ip access-list extended AutoQos-4.0-wlan-Acl-MultiEnhanced-Conf
+ permit udp any any range 16384 32767
+ permit tcp any any range 50000 59999
+ip access-list extended AutoQos-4.0-wlan-Acl-Scavanger
+ permit tcp any any range 2300 2400
+ permit udp any any range 2300 2400
+ permit tcp any any range 6881 6999
+ permit tcp any any range 28800 29100
+ permit tcp any any eq 1214
+ permit udp any any eq 1214
+ permit tcp any any eq 3689
+ permit udp any any eq 3689
+ permit tcp any any eq 11999
+ip access-list extended AutoQos-4.0-wlan-Acl-Signaling
+ permit tcp any any range 2000 2002
+ permit tcp any any range 5060 5061
+ permit udp any any range 5060 5061
+ip access-list extended AutoQos-4.0-wlan-Acl-Transactional-Data
+ permit tcp any any eq 443
+ permit tcp any any eq 1521
+ permit udp any any eq 1521
+ --More--          permit tcp any any eq 1526
+ permit udp any any eq 1526
+ permit tcp any any eq 1575
+ permit udp any any eq 1575
+ permit tcp any any eq 1630
+ permit udp any any eq 1630
+ permit tcp any any eq 1527
+ permit tcp any any eq 6200
+ permit tcp any any eq 3389
+ permit tcp any any eq 5985
+ permit tcp any any eq 8080
+!
+!
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+!
+no vstack
+!
+line con 0
+ --More--          stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ password noforget
+line vty 5 15
+!
+!
+wsma agent exec
+!
+wsma agent config
+!
+wsma agent filesys
+!
+wsma agent notify
+!
+!
+ap dot11 airtime-fairness policy-name Default 0
+ap group default-group
+ap hyperlocation ble-beacon 0
+ap hyperlocation ble-beacon 1
+ap hyperlocation ble-beacon 2
+ap hyperlocation ble-beacon 3
+ --More--         ap hyperlocation ble-beacon 4
+end
+
+CORE-L3-H146-ISGEC-SH# 
+CORE-L3-H146-ISGEC-SH#
+CORE-L3-H146-ISGEC-SH#
