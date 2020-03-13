@@ -1,0 +1,206 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:50:52 =~=~=~=~=~=~=~=~=~=~=~=
+
+User Access Verification
+
+Password: 
+L3-Chennai>en
+Password: 
+Password: 
+L3-Chennai#sh ri un
+Building configuration...
+
+Current configuration : 3963 bytes
+!
+version 12.2
+no service pad
+service timestamps debug uptime
+service timestamps log uptime
+no service password-encryption
+!
+hostname L3-Chennai
+!
+enable secret 5 $1$engk$ZSdAza.BJUEi/reTgIGK9/
+enable password cisco
+!
+username cisco password 0 cisco
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+ip routing
+ip dhcp excluded-address 192.168.22.1 192.168.22.200
+ --More--         ip dhcp excluded-address 192.168.22.225
+ip dhcp excluded-address 192.168.33.1 192.168.33.200
+ip dhcp excluded-address 192.168.22.241 192.168.22.254
+ip dhcp excluded-address 192.168.33.241 192.168.33.254
+!
+ip dhcp pool wifi-22
+   network 192.168.22.0 255.255.255.0
+   default-router 192.168.22.200 
+   dns-server 192.168.22.6 
+   domain-name isgecnet.com
+   lease 8
+!
+ip dhcp pool wifi-33
+   network 192.168.33.0 255.255.255.0
+   default-router 192.168.33.1 
+   dns-server 192.168.22.6 
+   domain-name isgecnet.com
+   lease 8
+!
+!
+ --More--         !
+!
+no file verify auto
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+interface GigabitEthernet0/1
+ switchport mode access
+!
+interface GigabitEthernet0/2
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/3
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/4
+ --More--          switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/5
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/6
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/7
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/8
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/9
+ --More--          switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/10
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/11
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet0/12
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet0/13
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet0/14
+ --More--          switchport access vlan 4
+ switchport mode access
+!
+interface GigabitEthernet0/15
+ switchport access vlan 5
+ switchport mode access
+!
+interface GigabitEthernet0/16
+ switchport access vlan 5
+ switchport mode access
+!
+interface GigabitEthernet0/17
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet0/18
+ switchport access vlan 22
+ switchport mode access
+!
+interface GigabitEthernet0/19
+ --More--         !
+interface GigabitEthernet0/20
+!
+interface GigabitEthernet0/21
+!
+interface GigabitEthernet0/22
+!
+interface GigabitEthernet0/23
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet0/24
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+ --More--         !
+interface GigabitEthernet0/28
+!
+interface Vlan1
+ ip address 10.10.10.10 255.255.255.0
+!
+interface Vlan2
+ ip address 192.168.22.200 255.255.255.0
+ ip helper-address 192.168.22.200
+!
+interface Vlan3
+ ip address 192.168.33.1 255.255.255.0
+!
+interface Vlan4
+ ip address 192.168.34.1 255.255.255.0
+!
+interface Vlan5
+ ip address 192.168.35.1 255.255.255.0
+!
+interface Vlan11
+ --More--          no ip address
+!
+interface Vlan22
+ ip address 11.11.22.2 255.255.255.0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 11.11.22.1
+ip route 192.9.200.119 255.255.255.255 11.11.22.1
+ip route 192.9.200.129 255.255.255.255 11.11.22.1
+ip route 192.9.200.150 255.255.255.255 11.11.22.1
+ip route 192.9.200.198 255.255.255.255 11.11.22.1
+ip route 192.9.200.214 255.255.255.255 11.11.22.1
+ip route 192.168.25.48 255.255.255.255 192.168.22.1
+ip route 192.168.25.56 255.255.255.255 192.168.22.1
+ip route 192.168.40.0 255.255.255.0 11.11.22.1
+ip route 192.168.41.0 255.255.255.0 11.11.22.1
+ip http server
+!
+snmp-server community public RO
+!
+ --More--         control-plane
+!
+!
+line con 0
+line vty 0 4
+ password cisco
+ login
+ length 0
+line vty 5 15
+ password cisco
+ login
+!
+end
+
+L3-Chennai# 
+L3-Chennai#
