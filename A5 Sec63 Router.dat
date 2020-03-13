@@ -1,0 +1,151 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:27:00 =~=~=~=~=~=~=~=~=~=~=~=
+
+
+User Access Verification
+
+Username: cisco
+Password: 
+
+A5-TATA-LINK>en
+Password: 
+A5-TATA-LINK#sh run
+Building configuration...
+
+Current configuration : 2837 bytes
+!
+version 12.2
+no service pad
+service timestamps debug uptime
+service timestamps log uptime
+no service password-encryption
+!
+hostname A5-TATA-LINK
+!
+enable secret 5 $1$ZcJ1$aiRxuFzaZc3Cf0wYl1vyH.
+!
+username cisco password 0 cisco
+aaa new-model
+aaa authentication login default local
+!
+aaa session-id common
+switch 1 provision ws-c3750g-24t
+system mtu routing 1500
+ip subnet-zero
+ip routing
+!
+ --More--         !
+!
+!
+no file verify auto
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 2
+ switchport mode access
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 3
+ switchport mode access
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 4
+ switchport mode access
+!
+ --More--         interface GigabitEthernet1/0/5
+ switchport access vlan 4
+ switchport mode access
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+ --More--         !
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan2
+ --More--          ip address 10.10.63.1 255.255.255.0
+!
+interface Vlan3
+ ip address 20.20.20.4 255.255.255.0
+!
+interface Vlan4
+ ip address 11.11.11.2 255.255.255.0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 11.11.11.1
+ip route 8.8.8.8 255.255.255.255 192.168.25.10
+ip route 100.0.0.0 255.255.255.0 20.20.20.3
+ip route 172.1.0.0 255.255.0.0 20.20.20.3
+ip route 172.15.1.0 255.255.255.0 10.10.63.2
+ip route 173.1.0.0 255.255.255.0 101.0.0.2
+ip route 192.168.4.0 255.255.255.0 10.10.63.2
+ip route 192.168.5.0 255.255.255.0 10.10.63.2
+ip route 192.168.5.49 255.255.255.255 192.168.25.149
+ip route 192.168.6.0 255.255.255.0 10.10.63.2
+ip route 192.168.7.0 255.255.255.0 10.10.63.2
+ip route 192.168.8.0 255.255.255.0 20.20.20.1
+ip route 192.168.9.0 255.255.255.0 20.20.20.1
+ip route 192.168.15.0 255.255.255.0 20.20.20.1
+ --More--         ip route 192.168.16.0 255.255.255.0 20.20.20.1
+ip route 192.168.17.0 255.255.255.0 20.20.20.1
+ip route 192.168.18.0 255.255.255.0 20.20.20.1
+ip route 192.168.24.0 255.255.255.0 20.20.20.1
+ip route 192.168.25.0 255.255.255.0 20.20.20.2
+ip route 192.168.40.0 255.255.255.0 20.20.20.2
+ip route 192.168.41.0 255.255.255.0 20.20.20.2
+ip http server
+!
+radius-server source-ports 1645-1646
+!
+control-plane
+!
+!
+line con 0
+line vty 0 4
+ password noforget
+line vty 5 15
+!
+end
+
+A5-TATA-LINK#     
+A5-TATA-LINK#
+A5-TATA-LINK#
