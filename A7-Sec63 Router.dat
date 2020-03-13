@@ -1,0 +1,149 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:21:43 =~=~=~=~=~=~=~=~=~=~=~=
+
+
+User Access Verification
+
+Username: cisco
+Password: 
+A7-63-Router#sh run
+Building configuration...
+
+Current configuration : 3371 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service sequence-numbers
+!
+hostname A7-63-Router
+!
+boot-start-marker
+warm-reboot
+boot-end-marker
+!
+logging buffered 51200 warnings
+enable secret 5 $1$Gko0$R25APYImHYdMJ1du/5i4P0
+!
+no aaa new-model
+ip cef
+!
+!
+!
+ --More--         !
+ip domain name yourdomain.com
+multilink bundle-name authenticated
+!
+!
+username cisco privilege 15 secret 5 $1$4w0S$cti.5fo0DVTWJNFHwsVtO/
+archive
+ log config
+  hidekeys
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ description # BSNL P2P to A7-L3 SW #
+ ip address 10.10.64.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description #### P2P BSNL ####
+ ip address 11.11.12.2 255.255.255.0
+ --More--          duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface FastEthernet0/1/0
+ description # BSNL failover P2P to A7-L3 SW #
+ ip address 20.20.20.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 11.11.12.1
+ip route 100.0.0.0 255.255.255.0 20.20.20.4
+ip route 101.0.0.0 255.255.255.0 10.10.64.2
+ --More--         ip route 172.1.0.0 255.255.0.0 20.20.20.4
+ip route 173.1.0.0 255.255.0.0 10.10.64.5
+ip route 192.168.4.0 255.255.255.0 20.20.20.3
+ip route 192.168.5.0 255.255.255.0 20.20.20.3
+ip route 192.168.6.0 255.255.255.0 20.20.20.3
+ip route 192.168.7.0 255.255.255.0 20.20.20.3
+ip route 192.168.8.0 255.255.255.0 10.10.64.2
+ip route 192.168.9.0 255.255.255.0 10.10.64.2
+ip route 192.168.10.0 255.255.255.0 11.11.12.1
+ip route 192.168.15.0 255.255.255.0 10.10.64.2
+ip route 192.168.16.0 255.255.255.0 10.10.64.2
+ip route 192.168.17.0 255.255.255.0 10.10.64.2
+ip route 192.168.18.0 255.255.255.0 10.10.64.2
+ip route 192.168.22.0 255.255.255.0 11.11.12.1
+ip route 192.168.24.0 255.255.255.0 10.10.64.2
+ip route 192.168.25.0 255.255.255.0 10.10.64.2
+ip route 192.168.33.0 255.255.255.0 11.11.12.1
+ip route 192.168.40.0 255.255.255.0 192.168.25.190
+ip route 192.168.41.0 255.255.255.0 192.168.25.190
+ip route 192.168.110.0 255.255.255.0 11.11.12.1
+!
+!
+ip http server
+ --More--         ip http access-class 23
+ip http authentication local
+ip http timeout-policy idle 60 life 86400 requests 10000
+!
+snmp-server community public RO
+!
+!
+control-plane
+!
+banner login ^C
+-----------------------------------------------------------------------
+Cisco Router and Security Device Manager (SDM) is installed on this device. 
+This feature requires the one-time use of the username "cisco" 
+with the password "cisco". The default username and password have a privilege level of 15.
+
+Please change these publicly known initial credentials using SDM or the IOS CLI. 
+Here are the Cisco IOS commands.
+
+username <myuser>  privilege 15 secret 0 <mypassword>
+no username cisco
+ --More--         
+Replace <myuser> and <mypassword> with the username and password you want to use. 
+
+For more information about SDM please follow the instructions in the QUICK START 
+GUIDE for your router or go to http://www.cisco.com/go/sdm 
+-----------------------------------------------------------------------
+^C
+!
+line con 0
+ login local
+line aux 0
+line vty 0 4
+ access-class 23 in
+ privilege level 15
+ login local
+ transport input telnet
+line vty 5 15
+ access-class 23 in
+ privilege level 15
+ login local
+ transport input telnet
+ --More--         !
+scheduler allocate 20000 1000
+end
+
+A7-63-Router# 
+A7-63-Router#
+A7-63-Router#
