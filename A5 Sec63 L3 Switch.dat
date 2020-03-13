@@ -1,0 +1,407 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.03 12:47:04 =~=~=~=~=~=~=~=~=~=~=~=
+User Access Verification
+
+Username: cisco
+Password: 
+
+ISGEC-L3-SWITCH-A7>en
+Password: 
+ISGEC-L3-SWITCH-A7#sh run
+Building configuration...
+
+Current configuration : 9786 bytes
+!
+! Last configuration change at 04:31:24 UTC Fri Aug 23 2019 by cisco
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname ISGEC-L3-SWITCH-A7
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ --More--          exit-address-family
+!
+enable secret 4 WUrzYMRStbjfk2/dqX3aa2EbRWAUovImaNWm5sLF9Yk
+!
+username cisco privilege 15 password 0 cisco
+aaa new-model
+!
+!
+aaa authentication login default local
+!
+!
+!
+!
+!
+aaa session-id common
+switch 1 provision ws-c3850-24t
+ip routing
+!
+ip device tracking
+ip dhcp excluded-address 192.168.19.52 192.168.19.254
+!
+ip dhcp pool A-7-Wifi
+ network 192.168.19.0 255.255.255.0
+ dns-server 8.8.8.8 
+ --More--          default-router 192.168.19.1 
+ lease 2
+!
+!
+qos wireless-default-untrust
+vtp mode transparent
+!
+crypto pki trustpoint TP-self-signed-1339534689
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1339534689
+ revocation-check none
+ rsakeypair TP-self-signed-1339534689
+!
+!
+crypto pki certificate chain TP-self-signed-1339534689
+ certificate self-signed 01
+  3082024A 308201B3 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333339 35333436 3839301E 170D3137 31323233 32333532 
+  31315A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 33333935 
+  33343638 3930819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100E456 11DBFDA6 435D1A95 12CB3DCB 7542D6F2 1AA3CED6 F75BCEF1 2D9DBAA8 
+  6B5DC316 285563F7 33A93C5D 4DA5CEF5 9993E0FD 572FE615 1A345746 5270F817 
+ --More--           9F30FCD4 AED80EF3 4B8154C8 5A1F6F8C 778FBD12 9CE25131 929DC319 DF247C4F 
+  08DA5782 6FEE986A 31971B19 B33C4BEB C13D683A C5BC71F4 35AF0610 0C81775C 
+  E1DB0203 010001A3 72307030 0F060355 1D130101 FF040530 030101FF 301D0603 
+  551D1104 16301482 12495347 45432D4C 332D5357 49544348 2D413730 1F060355 
+  1D230418 30168014 E970D766 28F6358C 6919D5BD 509D15E3 817408F8 301D0603 
+  551D0E04 160414E9 70D76628 F6358C69 19D5BD50 9D15E381 7408F830 0D06092A 
+  864886F7 0D010104 05000381 81001FCA A693AE2B 68BFC7D4 8859E0C1 57A271FB 
+  7D80205B 65FA4A7E 4814759B 8142B655 50F4E59F 7DCAFDFB 344DB0B3 A6F5FF9D 
+  E4346647 6E390D39 A4875933 677641E1 279CA24C 0C685678 96FF429B 2B97BA45 
+  A4C2C9BE 27714C17 2CCE0CC6 437B9CCA A0BB29F6 509657A9 D9E495A5 32B90527 
+  844A6256 5B1D0A9E 97C9004A 2156
+  	quit
+!
+!
+!
+!
+!
+diagnostic bootup level minimal
+identity policy webauth-global-inactive
+ inactivity-timer 3600 
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+redundancy
+ --More--          mode sso
+!
+!
+vlan 8-9,15-18 
+!
+vlan 19
+ name VLAN19-WIFI-GUEST
+!
+vlan 20,24-25,64 
+!
+!
+class-map match-any non-client-nrt-class
+  match non-client-nrt 
+!
+policy-map port_child_policy
+ class non-client-nrt-class
+    bandwidth remaining ratio 10
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ --More--          vrf forwarding Mgmt-vrf
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ description ##A-8-First Floor##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 24
+ switchport mode access
+!
+interface GigabitEthernet1/0/3
+ description ##A7-Second-Floor##
+ switchport access vlan 16
+ switchport mode access
+!
+interface GigabitEthernet1/0/4
+ description ##A7-Second-Floor##
+ switchport access vlan 16
+ switchport mode access
+!
+interface GigabitEthernet1/0/5
+ --More--          description ##A7-Second-Floor##
+ switchport access vlan 16
+ switchport mode access
+!
+interface GigabitEthernet1/0/6
+ description ##A7-Second-Floor##
+ switchport access vlan 16
+ switchport mode access
+!
+interface GigabitEthernet1/0/7
+ description ##A56-Ground-Basement-Floor##
+ switchport access vlan 17
+ switchport mode access
+!
+interface GigabitEthernet1/0/8
+ description ##A7-Third-Floor##
+ switchport access vlan 18
+ switchport mode access
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/10
+ --More--          description ##A7-First-Ground-Floor##
+ switchport access vlan 24
+ switchport mode access
+!
+interface GigabitEthernet1/0/11
+ description ##A7-First-Ground-Floor##
+ switchport access vlan 24
+ switchport mode access
+!
+interface GigabitEthernet1/0/12
+ description ##A7-First-Ground-Floor##
+ switchport access vlan 24
+ switchport mode access
+!
+interface GigabitEthernet1/0/13
+ description ## A8-2nd-Floor ##
+ switchport access vlan 9
+ switchport mode access
+!
+interface GigabitEthernet1/0/14
+ description ##A7-First-Ground-Floor##
+ switchport access vlan 24
+ switchport mode access
+!
+ --More--         interface GigabitEthernet1/0/15
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/16
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/17
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/18
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/19
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+ --More--         !
+interface GigabitEthernet1/0/20
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/21
+ description ##SERVER-VLAN##
+ switchport access vlan 25
+ switchport mode access
+!
+interface GigabitEthernet1/0/22
+ description ##BSNL-Router-Connectivity##
+ switchport access vlan 64
+ switchport mode access
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 19
+ switchport mode access
+!
+interface GigabitEthernet1/0/24
+ description ##A5-Connectivity-BSNL##
+ switchport access vlan 20
+ switchport mode access
+ --More--         !
+interface GigabitEthernet1/1/1
+ switchport access vlan 8
+ switchport mode access
+!
+interface GigabitEthernet1/1/2
+ description ##Fiber-Connectvity-A5##
+ switchport access vlan 20
+ switchport mode access
+!
+interface GigabitEthernet1/1/3
+ description ##fiber-connectivity-A56-grn##
+ switchport access vlan 17
+ switchport mode access
+!
+interface GigabitEthernet1/1/4
+ description ##Fiber-Connectivity-A56-1st##
+ switchport access vlan 15
+ switchport mode access
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+ --More--         interface TenGigabitEthernet1/1/3
+!
+interface TenGigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan8
+ ip address 192.168.8.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan9
+ ip address 192.168.9.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan15
+ ip address 192.168.15.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan16
+ ip address 192.168.16.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan17
+ --More--          ip address 192.168.17.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan18
+ ip address 192.168.18.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan19
+ ip address 192.168.19.1 255.255.255.0
+!
+interface Vlan20
+ ip address 20.20.20.2 255.255.255.0
+!
+interface Vlan24
+ ip address 192.168.24.1 255.255.255.0
+ ip helper-address 192.168.25.53
+!
+interface Vlan25
+ ip address 192.168.25.1 255.255.255.0
+!
+interface Vlan64
+ ip address 10.10.64.2 255.255.255.0
+!
+no ip http server
+ --More--         ip http authentication local
+ip http secure-server
+ip route 0.0.0.0 0.0.0.0 192.168.25.149
+ip route 11.11.12.2 255.255.255.255 10.10.64.1
+ip route 11.11.16.0 255.255.255.0 20.20.20.4
+ip route 100.0.0.0 255.255.255.0 20.20.20.3
+ip route 172.1.0.0 255.255.0.0 20.20.20.3
+ip route 172.15.1.0 255.255.255.0 20.20.20.3
+ip route 172.16.2.0 255.255.255.0 192.168.25.12
+ip route 172.16.10.0 255.255.255.0 192.168.25.12
+ip route 173.1.0.0 255.255.255.0 101.0.0.2
+ip route 192.9.100.0 255.255.255.0 20.20.20.4
+ip route 192.9.200.0 255.255.255.0 20.20.20.4
+ip route 192.9.200.55 255.255.255.255 10.10.64.1
+ip route 192.168.4.0 255.255.255.0 20.20.20.3
+ip route 192.168.5.0 255.255.255.0 20.20.20.3
+ip route 192.168.5.49 255.255.255.255 192.168.25.149
+ip route 192.168.6.0 255.255.255.0 20.20.20.3
+ip route 192.168.7.0 255.255.255.0 20.20.20.3
+ip route 192.168.10.0 255.255.255.0 20.20.20.4
+ip route 192.168.11.0 255.255.255.0 20.20.20.4
+ip route 192.168.22.0 255.255.255.0 20.20.20.4
+ip route 192.168.28.0 255.255.255.0 20.20.20.4
+ip route 192.168.29.0 255.255.255.0 20.20.20.4
+ --More--         ip route 192.168.30.0 255.255.255.0 20.20.20.4
+ip route 192.168.31.0 255.255.255.0 20.20.20.4
+ip route 192.168.32.0 255.255.255.0 20.20.20.4
+ip route 192.168.33.0 255.255.255.0 20.20.20.4
+ip route 192.168.40.0 255.255.255.0 192.168.25.190
+ip route 192.168.41.0 255.255.255.0 192.168.25.190
+ip route 192.168.110.0 255.255.255.0 10.10.64.1
+!
+!
+!
+snmp-server community public RO
+snmp-server enable traps license
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 5 15
+!
+wsma agent exec
+ profile httplistener
+ --More--          profile httpslistener
+wsma agent config
+ profile httplistener
+ profile httpslistener
+wsma agent filesys
+ profile httplistener
+ profile httpslistener
+wsma agent notify
+ profile httplistener
+ profile httpslistener
+!
+wsma profile listener httplistener
+ transport http
+!
+wsma profile listener httpslistener
+ transport https
+ap dot11 24ghz rrm channel dca 1
+ap dot11 24ghz rrm channel dca 6
+ap dot11 24ghz rrm channel dca 11
+ap dot11 5ghz rrm channel dca 36
+ap dot11 5ghz rrm channel dca 40
+ap dot11 5ghz rrm channel dca 44
+ap dot11 5ghz rrm channel dca 48
+ap dot11 5ghz rrm channel dca 52
+ --More--         ap dot11 5ghz rrm channel dca 56
+ap dot11 5ghz rrm channel dca 60
+ap dot11 5ghz rrm channel dca 64
+ap dot11 5ghz rrm channel dca 149
+ap dot11 5ghz rrm channel dca 153
+ap dot11 5ghz rrm channel dca 157
+ap dot11 5ghz rrm channel dca 161
+ap group default-group
+end
+
+ISGEC-L3-SWITCH-A7#   
+ISGEC-L3-SWITCH-A7#
+ISGEC-L3-SWITCH-A7#
