@@ -1,0 +1,15 @@
+bind = yes
+#bind_dn = cn=Admin,dc=ijt,dc=co,dc=in
+bind_pw = secret@123
+#server_host = localhost
+bind_dn = cn=Directory Manager
+#bind_pw = redhat@#!23
+server_host = 192.9.200.226, 192.9.200.216
+server_port = 389
+search_base = o=virtual,dc=ijt,dc=co,dc=in
+version = 3
+#@@query_filter = (&(&(objectClass=VirtualMailAccount)(mail=%s))(accountActive=TRUE)(otherTransport=ms1.ijt.co.in)(forwardActive=TRUE))
+#query_filter = (&(&(objectClass=VirtualMailAccount)(mail=%s))(accountActive=TRUE)(otherTransport=ms1.ijt.co.in))
+query_filter = (&(&(objectClass=VirtualMailAccount)(mail=%S))(accountActive=TRUE))
+#query_filter=(&(&(&(objectClass=VirtualMailAccount)(mail=%S)(accountActive=TRUE))(mailHost=192.168.25.43))
+result_attribute = maildrop

@@ -1,0 +1,13 @@
+bind = yes
+#bind_dn = cn=Admin,dc=ijt,dc=co,dc=in
+bind_pw = secret@123
+bind_dn = cn=Directory Manager
+server_host = 192.9.200.226, 192.9.200.216
+#bind_pw = secret@123
+version = 3
+#server_host = localhost
+server_port = 389
+search_base = o=virtual,dc=ijt,dc=co,dc=in
+#query_filter = (&(&(objectClass=VirtualMailAccount)(mail=%s))(accountActive=TRUE)(delete=FALSE))
+query_filter = (&(&(&(objectClass=virtualmailaccount)(mail=%s)) (objectClass=mailrecipient)) (accountactive=TRUE)(delete=FALSE))
+result_attribute = mailbox

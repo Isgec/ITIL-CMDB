@@ -1,0 +1,2 @@
+/^(.*)-owner\@lists\.postfix\.ijt\.co\.in$/    $1+owner@lists.postfix.ijt.co.in
+/^(.*)-owner\@lists\.ijt\.co\.in$/    $1+owner@lists.ijt.co.in
