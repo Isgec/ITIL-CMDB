@@ -1,0 +1,4 @@
+server_host = 192.9.200.226, 192.9.200.216
+search_base = o=virtual,dc=ijt,dc=co,dc=in
+query_filter = (&(&(objectClass=groupofuniquenames)(mail=%s))(accountactive=TRUE)(delete=FALSE))
+special_result_attribute = uniqueMember

@@ -1,0 +1,17 @@
+##
+bind = yes
+#bind_dn =  cn=postfix,o=virtual,dc=ijt,dc=co,dc=in
+#bind_dn =  cn=admin,dc=ijt,dc=co,dc=in
+bind_pw = secret@123
+version = 3
+#server_host = localhost
+server_host = 192.9.200.216, 192.9.200.226
+bind_dn = cn=Directory Manager
+#bind_pw = redhat@#!23
+server_port = 389
+search_base = o=virtual,dc=ijt,dc=co,dc=in
+query_filter = (&(&(mail=%s)(objectClass=VirtualMailAccount))(accountActive=TRUE)(delete=FALSE))
+result_attribute = mail
+##Changed by tuxamit
+#result_format = smtp:[192.9.200.210]
+result_format = virtual:[%s]

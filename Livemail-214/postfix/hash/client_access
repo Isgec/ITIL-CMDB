@@ -1,0 +1,9 @@
+#fosteringlinux.com	DISCARD
+#ashu@ijt.co.in		FILTER		smtp:[127.0.0.1]:589
+#ashu@ijt.co.in		DISCARD
+hsgroupdelhi.com	OK
+facey@akersolutions.com	OK	
+200.234.200.43		OK
+mtibwa-sugar.co.tz      OK
+192.9.200.10		OK
+nirmesh.bhatt@siemens.com	OK

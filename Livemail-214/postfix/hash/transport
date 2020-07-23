@@ -1,0 +1,3 @@
+##All autoreplies will be sent to the relay server
+autoreply.ijt.co.in        smtp:[192.9.200.210]
+autoreply.isgec.in         smtp:[192.9.200.210]

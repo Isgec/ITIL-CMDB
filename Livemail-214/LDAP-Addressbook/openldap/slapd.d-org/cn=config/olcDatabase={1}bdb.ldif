@@ -1,0 +1,44 @@
+dn: olcDatabase={1}bdb
+objectClass: olcDatabaseConfig
+objectClass: olcBdbConfig
+olcDatabase: {1}bdb
+olcSuffix: dc=my-domain,dc=com
+olcAddContentAcl: FALSE
+olcLastMod: TRUE
+olcMaxDerefDepth: 15
+olcReadOnly: FALSE
+olcRootDN: cn=Manager,dc=my-domain,dc=com
+olcSyncUseSubentry: FALSE
+olcMonitoring: TRUE
+olcDbDirectory: /var/lib/ldap
+olcDbCacheSize: 1000
+olcDbCheckpoint: 1024 15
+olcDbNoSync: FALSE
+olcDbDirtyRead: FALSE
+olcDbIDLcacheSize: 0
+olcDbIndex: objectClass pres,eq
+olcDbIndex: cn pres,eq,sub
+olcDbIndex: uid pres,eq,sub
+olcDbIndex: uidNumber pres,eq
+olcDbIndex: gidNumber pres,eq
+olcDbIndex: mail pres,eq,sub
+olcDbIndex: ou pres,eq,sub
+olcDbIndex: loginShell pres,eq
+olcDbIndex: sn pres,eq,sub
+olcDbIndex: givenName pres,eq,sub
+olcDbIndex: memberUid pres,eq,sub
+olcDbIndex: nisMapName pres,eq,sub
+olcDbIndex: nisMapEntry pres,eq,sub
+olcDbLinearIndex: FALSE
+olcDbMode: 0600
+olcDbSearchStack: 16
+olcDbShmKey: 0
+olcDbCacheFree: 1
+olcDbDNcacheSize: 0
+structuralObjectClass: olcBdbConfig
+entryUUID: a587cc82-3274-1032-9510-fd6c94020336
+creatorsName: cn=config
+createTimestamp: 20130405194208Z
+entryCSN: 20130405194208.521545Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20130405194208Z
