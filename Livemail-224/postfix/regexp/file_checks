@@ -1,0 +1,1 @@
+/^content-(type|disposition):.*name[[:space:]]*=.*\.(vbs|dll|mp3|bat|com|3gp|mpg|rm|avi|mov|wmv|mp4|exe)/           REJECT RISTRICTED ATTACHMENT FILE : $2

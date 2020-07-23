@@ -1,0 +1,5 @@
+#/.*Sai baba's .*/		DISCARD
+#/.*Sai baba.*/			DISCARD
+#/.*facebook.com*/		DISCARD
+/.*zorpia.com*/			DISCARD
+#/.*gaadi*/			DISCARD

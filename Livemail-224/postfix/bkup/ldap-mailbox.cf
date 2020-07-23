@@ -1,0 +1,5 @@
+server_host=192.9.200.222
+search_base=o=virtual,dc=ijt,dc=co,dc=in
+query_filter=(&(&(objectClass=VirtualMailAccount)(mail=%s))(accountActive=TRUE)(delete=FALSE))
+result_attribute=mailbox
+result_format=%s/

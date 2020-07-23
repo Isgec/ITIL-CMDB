@@ -1,0 +1,12 @@
+bind = yes
+version = 3
+server_host = 192.9.200.226, 192.9.200.216
+bind_dn = cn=Directory Manager
+bind_pw = secret@123
+#bind_dn = cn=Admin,dc=ijt,dc=co,dc=in
+#bind_pw = secret@123
+#server_host = localhost
+server_port = 389
+search_base = o=virtual,dc=ijt,dc=co,dc=in
+query_filter = (&(&(mail=%s)(objectClass=VirtualMailAccount))(accountActive=TRUE)(delete=FALSE))
+result_attribute = quota
